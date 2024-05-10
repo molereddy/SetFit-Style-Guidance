@@ -23,7 +23,7 @@ def prepare_split(data_path, split, tokenizer):
     dataset = dataset.map(tokenize_function, batched=True)
     return dataset
 
-def load_gyfac(data_path = "gyfac_pilot", val_split=0.1):
+def load_gyfac(data_path = "/work/pi_dhruveshpate_umass_edu/project_18/gyfac_pilot", val_split=0.1):
     full_train_dataset = prepare_split(data_path, "train", tokenizer)
     train_splits = full_train_dataset.train_test_split(test_size=val_split, shuffle=True)
     train_dataset = train_splits["train"]
