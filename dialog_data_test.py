@@ -156,8 +156,8 @@ drive.mount('/content/drive')
 from datasets import load_dataset
 import pandas as pd
 
-# enter the path to the file below
-file_path = '/content/drive/MyDrive/Dialog_data_input.xls'
+# enter the path to the file below, which is from dialog_data folder, change it accordingly
+file_path = '/content/drive/Shareddrives/COMPSCI685/dialog_data/Dialog_data_input.xlsx'
 data = pd.read_excel(file_path)
 data = list(data['Sentences'])
 
@@ -172,9 +172,7 @@ model_id = "Vamsi/T5_Paraphrase_Paws"
 model = T5ForConditionalGeneration.from_pretrained(model_id)
 
 # enter the path to the model to test below
-classifier_model = SetFitModel.from_pretrained('/content/drive/MyDrive/gyfac_finetuned')
-
-data = data[:5]
+classifier_model = SetFitModel.from_pretrained('/content/drive/Shareddrives/COMPSCI685/model_checkpoints/gyfac_finetuned')
 
 import time
 lmbda = [10,15]
