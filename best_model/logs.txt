@@ -1,0 +1,118 @@
+gypsum-gpu085                  Sat May 11 00:20:02 2024  535.154.05
+[0] NVIDIA GeForce GTX TITAN X | 33'C,   0 % |    82 / 12288 MB |
+Fri May 10 20:20:02 EDT 2024
+Train Dataset: Dataset({
+    features: ['text', 'label', 'input_ids', 'attention_mask'],
+    num_rows: 99910
+})
+Validation Dataset: Dataset({
+    features: ['text', 'label', 'input_ids', 'attention_mask'],
+    num_rows: 5259
+})
+Test Dataset: Dataset({
+    features: ['text', 'label', 'input_ids', 'attention_mask'],
+    num_rows: 2498
+})
+                                                                       Sentence  Label
+0                                                I dont mean to sound Viscious       1
+1            Well if the milking process is going on wouldnt she be your wife..      1
+2                              Of course, most of them are called weird anyway       0
+3  I am in Los Angeles where I enjoy the weather, LA Angels, and Orange County       0
+4             I might have given it to you if you had not been screaming at me       0
+steps_per_epoch:	2081
+max_steps: 6244
+{'loss': 0.7029, 'grad_norm': 2.9388389587402344, 'learning_rate': 1.04e-05, 'epoch': 0.05}
+{'loss': 0.5371, 'grad_norm': 3.5609166622161865, 'learning_rate': 2.08e-05, 'epoch': 0.1}
+{'loss': 0.4417, 'grad_norm': 4.09180212020874, 'learning_rate': 3.12e-05, 'epoch': 0.15}
+{'loss': 0.3093, 'grad_norm': 1.9463568925857544, 'learning_rate': 4.16e-05, 'epoch': 0.2}
+{'eval_loss': 0.2640845477581024, 'eval_runtime': 33.7221, 'eval_samples_per_second': 155.951, 'eval_steps_per_second': 0.623, 'epoch': 0.2}
+Step 416: Evaluation loss: 0.2640845477581024
+{'loss': 0.2672, 'grad_norm': 4.419929027557373, 'learning_rate': 4.9825905292479115e-05, 'epoch': 0.25}
+{'loss': 0.251, 'grad_norm': 1.8688982725143433, 'learning_rate': 4.8920612813370476e-05, 'epoch': 0.3}
+{'loss': 0.2394, 'grad_norm': 1.4687464237213135, 'learning_rate': 4.801532033426184e-05, 'epoch': 0.35}
+{'loss': 0.2349, 'grad_norm': 1.1773513555526733, 'learning_rate': 4.71100278551532e-05, 'epoch': 0.4}
+{'eval_loss': 0.21182498335838318, 'eval_runtime': 32.823, 'eval_samples_per_second': 160.223, 'eval_steps_per_second': 0.64, 'epoch': 0.4}
+Step 832: Evaluation loss: 0.21182498335838318
+{'loss': 0.2211, 'grad_norm': 2.2635316848754883, 'learning_rate': 4.620473537604457e-05, 'epoch': 0.45}
+{'loss': 0.2274, 'grad_norm': 1.9714877605438232, 'learning_rate': 4.529944289693593e-05, 'epoch': 0.5}
+{'loss': 0.2203, 'grad_norm': 1.961356282234192, 'learning_rate': 4.4394150417827305e-05, 'epoch': 0.55}
+{'loss': 0.2246, 'grad_norm': 1.7855101823806763, 'learning_rate': 4.3488857938718665e-05, 'epoch': 0.6}
+{'eval_loss': 0.2153327316045761, 'eval_runtime': 33.1764, 'eval_samples_per_second': 158.516, 'eval_steps_per_second': 0.633, 'epoch': 0.6}
+Step 1248: Evaluation loss: 0.2153327316045761
+{'loss': 0.2198, 'grad_norm': 0.5203638672828674, 'learning_rate': 4.258356545961003e-05, 'epoch': 0.65}
+{'loss': 0.2071, 'grad_norm': 1.5790060758590698, 'learning_rate': 4.167827298050139e-05, 'epoch': 0.7}
+{'loss': 0.212, 'grad_norm': 2.2227487564086914, 'learning_rate': 4.077298050139276e-05, 'epoch': 0.75}
+{'loss': 0.206, 'grad_norm': 2.584930658340454, 'learning_rate': 3.986768802228412e-05, 'epoch': 0.8}
+{'eval_loss': 0.20306868851184845, 'eval_runtime': 32.8877, 'eval_samples_per_second': 159.908, 'eval_steps_per_second': 0.639, 'epoch': 0.8}
+Step 1664: Evaluation loss: 0.20306868851184845
+{'loss': 0.2092, 'grad_norm': 1.1740440130233765, 'learning_rate': 3.896239554317549e-05, 'epoch': 0.85}
+{'loss': 0.2014, 'grad_norm': 0.9453352689743042, 'learning_rate': 3.8057103064066855e-05, 'epoch': 0.9}
+{'loss': 0.2011, 'grad_norm': 2.319655179977417, 'learning_rate': 3.7151810584958215e-05, 'epoch': 0.95}
+{'loss': 0.2201, 'grad_norm': 1.464042067527771, 'learning_rate': 3.624651810584959e-05, 'epoch': 1.0}
+{'eval_loss': 0.19776588678359985, 'eval_runtime': 32.9865, 'eval_samples_per_second': 159.429, 'eval_steps_per_second': 0.637, 'epoch': 1.0}
+Step 2080: Evaluation loss: 0.19776588678359985
+{'loss': 0.1789, 'grad_norm': 1.4837745428085327, 'learning_rate': 3.534122562674095e-05, 'epoch': 1.05}
+{'loss': 0.1785, 'grad_norm': 1.1588140726089478, 'learning_rate': 3.443593314763232e-05, 'epoch': 1.1}
+{'loss': 0.1721, 'grad_norm': 1.7266680002212524, 'learning_rate': 3.353064066852368e-05, 'epoch': 1.15}
+{'loss': 0.1686, 'grad_norm': 0.7054420709609985, 'learning_rate': 3.2625348189415045e-05, 'epoch': 1.2}
+{'eval_loss': 0.19540996849536896, 'eval_runtime': 32.8303, 'eval_samples_per_second': 160.187, 'eval_steps_per_second': 0.64, 'epoch': 1.2}
+Step 2496: Evaluation loss: 0.19540996849536896
+{'loss': 0.1817, 'grad_norm': 1.8267784118652344, 'learning_rate': 3.1720055710306405e-05, 'epoch': 1.25}
+{'loss': 0.1755, 'grad_norm': 3.722367525100708, 'learning_rate': 3.081476323119777e-05, 'epoch': 1.3}
+{'loss': 0.1724, 'grad_norm': 3.1589276790618896, 'learning_rate': 2.9909470752089136e-05, 'epoch': 1.35}
+{'loss': 0.1807, 'grad_norm': 1.199682593345642, 'learning_rate': 2.9004178272980503e-05, 'epoch': 1.4}
+{'eval_loss': 0.19590246677398682, 'eval_runtime': 33.067, 'eval_samples_per_second': 159.041, 'eval_steps_per_second': 0.635, 'epoch': 1.4}
+Step 2912: Evaluation loss: 0.19590246677398682
+{'loss': 0.1874, 'grad_norm': 1.3961083889007568, 'learning_rate': 2.8098885793871864e-05, 'epoch': 1.45}
+{'loss': 0.1755, 'grad_norm': 3.1721649169921875, 'learning_rate': 2.7193593314763234e-05, 'epoch': 1.5}
+{'loss': 0.1859, 'grad_norm': 1.0257747173309326, 'learning_rate': 2.62883008356546e-05, 'epoch': 1.55}
+{'loss': 0.1657, 'grad_norm': 0.4413054287433624, 'learning_rate': 2.5383008356545962e-05, 'epoch': 1.6}
+{'eval_loss': 0.20846401154994965, 'eval_runtime': 32.7467, 'eval_samples_per_second': 160.596, 'eval_steps_per_second': 0.641, 'epoch': 1.6}
+Step 3328: Evaluation loss: 0.20846401154994965
+{'loss': 0.177, 'grad_norm': 3.3982772827148438, 'learning_rate': 2.4477715877437326e-05, 'epoch': 1.65}
+{'loss': 0.1776, 'grad_norm': 0.9680166840553284, 'learning_rate': 2.357242339832869e-05, 'epoch': 1.7}
+{'loss': 0.1773, 'grad_norm': 2.015058755874634, 'learning_rate': 2.2667130919220057e-05, 'epoch': 1.75}
+{'loss': 0.1714, 'grad_norm': 0.7432012557983398, 'learning_rate': 2.176183844011142e-05, 'epoch': 1.8}
+{'eval_loss': 0.18750664591789246, 'eval_runtime': 33.1393, 'eval_samples_per_second': 158.694, 'eval_steps_per_second': 0.634, 'epoch': 1.8}
+Step 3744: Evaluation loss: 0.18750664591789246
+{'loss': 0.1761, 'grad_norm': 0.8693211674690247, 'learning_rate': 2.0856545961002784e-05, 'epoch': 1.85}
+{'loss': 0.1778, 'grad_norm': 3.6720657348632812, 'learning_rate': 1.9951253481894152e-05, 'epoch': 1.9}
+{'loss': 0.1668, 'grad_norm': 1.5247889757156372, 'learning_rate': 1.904596100278552e-05, 'epoch': 1.95}
+{'loss': 0.1815, 'grad_norm': 1.7128961086273193, 'learning_rate': 1.8140668523676883e-05, 'epoch': 2.0}
+{'eval_loss': 0.20247405767440796, 'eval_runtime': 32.982, 'eval_samples_per_second': 159.451, 'eval_steps_per_second': 0.637, 'epoch': 2.0}
+Step 4160: Evaluation loss: 0.20247405767440796
+{'loss': 0.1445, 'grad_norm': 0.5821972489356995, 'learning_rate': 1.7235376044568247e-05, 'epoch': 2.05}
+{'loss': 0.1454, 'grad_norm': 2.157691478729248, 'learning_rate': 1.633008356545961e-05, 'epoch': 2.1}
+{'loss': 0.1454, 'grad_norm': 1.316453218460083, 'learning_rate': 1.5424791086350978e-05, 'epoch': 2.15}
+{'loss': 0.1437, 'grad_norm': 1.7867590188980103, 'learning_rate': 1.4519498607242341e-05, 'epoch': 2.2}
+{'eval_loss': 0.19538399577140808, 'eval_runtime': 33.1068, 'eval_samples_per_second': 158.85, 'eval_steps_per_second': 0.634, 'epoch': 2.2}
+Step 4576: Evaluation loss: 0.19538399577140808
+{'loss': 0.1459, 'grad_norm': 0.7135587930679321, 'learning_rate': 1.3614206128133705e-05, 'epoch': 2.25}
+{'loss': 0.1449, 'grad_norm': 1.6946353912353516, 'learning_rate': 1.2708913649025069e-05, 'epoch': 2.3}
+{'loss': 0.1315, 'grad_norm': 1.3969539403915405, 'learning_rate': 1.1803621169916435e-05, 'epoch': 2.35}
+{'loss': 0.1359, 'grad_norm': 2.3801534175872803, 'learning_rate': 1.08983286908078e-05, 'epoch': 2.4}
+{'eval_loss': 0.2081025093793869, 'eval_runtime': 33.0331, 'eval_samples_per_second': 159.204, 'eval_steps_per_second': 0.636, 'epoch': 2.4}
+Step 4992: Evaluation loss: 0.2081025093793869
+{'loss': 0.1503, 'grad_norm': 2.524277448654175, 'learning_rate': 9.993036211699166e-06, 'epoch': 2.45}
+{'loss': 0.1356, 'grad_norm': 1.309330701828003, 'learning_rate': 9.08774373259053e-06, 'epoch': 2.5}
+{'loss': 0.1505, 'grad_norm': 1.9688670635223389, 'learning_rate': 8.182451253481895e-06, 'epoch': 2.55}
+{'loss': 0.1482, 'grad_norm': 1.4051883220672607, 'learning_rate': 7.277158774373259e-06, 'epoch': 2.6}
+{'eval_loss': 0.20353171229362488, 'eval_runtime': 33.3089, 'eval_samples_per_second': 157.886, 'eval_steps_per_second': 0.63, 'epoch': 2.6}
+Step 5408: Evaluation loss: 0.20353171229362488
+{'loss': 0.1374, 'grad_norm': 3.24876070022583, 'learning_rate': 6.371866295264623e-06, 'epoch': 2.65}
+{'loss': 0.1472, 'grad_norm': 1.8116191625595093, 'learning_rate': 5.466573816155989e-06, 'epoch': 2.7}
+{'loss': 0.1438, 'grad_norm': 1.515152931213379, 'learning_rate': 4.561281337047354e-06, 'epoch': 2.75}
+{'loss': 0.1399, 'grad_norm': 0.5781766176223755, 'learning_rate': 3.655988857938719e-06, 'epoch': 2.8}
+{'eval_loss': 0.20841161906719208, 'eval_runtime': 32.8552, 'eval_samples_per_second': 160.066, 'eval_steps_per_second': 0.639, 'epoch': 2.8}
+Step 5824: Evaluation loss: 0.20841161906719208
+{'loss': 0.1393, 'grad_norm': 0.8440476059913635, 'learning_rate': 2.750696378830084e-06, 'epoch': 2.85}
+{'loss': 0.1486, 'grad_norm': 1.660264253616333, 'learning_rate': 1.8454038997214485e-06, 'epoch': 2.9}
+{'loss': 0.139, 'grad_norm': 2.0754783153533936, 'learning_rate': 9.401114206128134e-07, 'epoch': 2.95}
+{'loss': 0.1428, 'grad_norm': 2.377861261367798, 'learning_rate': 3.4818941504178276e-08, 'epoch': 3.0}
+{'eval_loss': 0.20662741363048553, 'eval_runtime': 33.0117, 'eval_samples_per_second': 159.307, 'eval_steps_per_second': 0.636, 'epoch': 3.0}
+Step 6240: Evaluation loss: 0.20662741363048553
+{'train_runtime': 5441.3131, 'train_samples_per_second': 55.081, 'train_steps_per_second': 1.148, 'train_loss': 0.1989903291931983, 'epoch': 3.0}
+Step 6244: Evaluation loss: 0.20517265796661377
+{'eval_loss': 0.20517265796661377, 'eval_runtime': 15.4689, 'eval_samples_per_second': 161.485, 'eval_steps_per_second': 0.646, 'epoch': 3.0}
+Done
+Fri May 10 21:51:12 EDT 2024

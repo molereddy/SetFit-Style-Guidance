@@ -74,23 +74,23 @@ def evaluate_model(model, test_dataset, batch_size, collator):
     print(f"Precision: {precision:.4f}, Recall: {recall:.4f}, F1-Score: {f1:.4f}, Accuracy: {accuracy:.4f}")
 
 test_samples = [
-    {"text": "The company launched its new product last week; it's expected to significantly increase market share.", "label": 1},
-    {"text": "Local weather forecast predicts rain for the entire weekend.", "label": 0},
-    {"text": "Annual revenue exceeded expectations by 15%, marking a notable success in the fiscal year.", "label": 1},
-    {"text": "The construction project down by the river will wrap up by late fall.", "label": 0},
-    {"text": "Observations confirm that the migration patterns are shifting earlier each year.", "label": 1},
-    {"text": "He’s always late to meetings, isn’t he?", "label": 0},
-    {"text": "Further research is required to understand the implications of this change fully.", "label": 1},
-    {"text": "Cats are known for their independence compared to other pets.", "label": 0},
-    {"text": "The latest novel by the author was released to critical acclaim but mixed audience reviews.", "label": 1},
-    {"text": "Make sure to check out the new cafe downtown—they’ve got the best coffee!", "label": 0}
+    {"text": "The company launched its new product last week; it's expected to significantly increase market share.", "label": 0},
+    {"text": "Local weather forecast predicts rain for the entire weekend.", "label": 1},
+    {"text": "Annual revenue exceeded expectations by 15%, marking a notable success in the fiscal year.", "label": 0},
+    {"text": "The construction project down by the river will wrap up by late fall.", "label": 1},
+    {"text": "Observations confirm that the migration patterns are shifting earlier each year.", "label": 0},
+    {"text": "He’s always late to meetings, isn’t he?", "label": 1},
+    {"text": "Further research is required to understand the implications of this change fully.", "label": 0},
+    {"text": "Cats are known for their independence compared to other pets.", "label": 1},
+    {"text": "The latest novel by the author was released to critical acclaim but mixed audience reviews.", "label": 0},
+    {"text": "Make sure to check out the new cafe downtown—they’ve got the best coffee!", "label": 1}
 ]
 
 def main():
     tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/sentence-t5-base")
     NUM_LABELS = 2
 
-    model_path = "results/checkpoint-2496"
+    model_path = "best_model"
     model = AutoModelForSequenceClassification.from_pretrained(model_path, num_labels=NUM_LABELS)
 
     # _, _, test_dataset = load_gyfac(tokenizer, seed=1, val_split=0.05, cut=True)

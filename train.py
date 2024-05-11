@@ -58,15 +58,15 @@ def main():
     show_random_elements(train_dataset, tokenizer)
     
     num_epochs = 3
-    batch_size = 24
-    gradient_accumulation_steps = 2
+    batch_size = 30
+    gradient_accumulation_steps = 1
     steps_per_epoch = len(train_dataset)//(batch_size*gradient_accumulation_steps)
     print(f"steps_per_epoch:\t{steps_per_epoch}")
     max_steps = int(num_epochs*len(train_dataset))//(batch_size*gradient_accumulation_steps)
     print(f"max_steps: {max_steps}")
     log_steps = steps_per_epoch//20
     eval_steps = log_steps*4
-    save_steps = eval_steps*2
+    save_steps = eval_steps
     
     
     training_args = TrainingArguments(
@@ -103,7 +103,7 @@ def main():
     trainer.evaluate()
     trainer.train()
     eval_result = trainer.evaluate(test_dataset)
-    print(eval_result)
+    print("GYFAC test result", eval_result)
 
 if __name__ == "__main__":
     main()

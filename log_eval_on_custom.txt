@@ -1,0 +1,50 @@
+Text: The company launched its new product last week; it's expected to significantly increase market share.
+True Label: 1, Predicted Label: 0
+
+---
+
+Text: Local weather forecast predicts rain for the entire weekend.
+True Label: 0, Predicted Label: 0
+
+---
+
+Text: Annual revenue exceeded expectations by 15%, marking a notable success in the fiscal year.
+True Label: 1, Predicted Label: 0
+
+---
+
+Text: The construction project down by the river will wrap up by late fall.
+True Label: 0, Predicted Label: 0
+
+---
+
+Text: Observations confirm that the migration patterns are shifting earlier each year.
+True Label: 1, Predicted Label: 0
+
+---
+
+Text: He’s always late to meetings, isn’t he?
+True Label: 0, Predicted Label: 1
+
+---
+
+Text: Further research is required to understand the implications of this change fully.
+True Label: 1, Predicted Label: 0
+
+---
+
+Text: Cats are known for their independence compared to other pets.
+True Label: 0, Predicted Label: 0
+
+---
+
+Text: The latest novel by the author was released to critical acclaim but mixed audience reviews.
+True Label: 1, Predicted Label: 0
+
+---
+
+Text: Make sure to check out the new cafe downtown—they’ve got the best coffee!
+True Label: 0, Predicted Label: 1
+
+---
+
