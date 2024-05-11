@@ -34,18 +34,17 @@ def show_random_elements(dataset, tokenizer, num_examples=5):
     df = pd.DataFrame(examples)
     print(df)
 
-# def compute_metrics(pred):
-#     labels = pred.label_ids
-#     import pdb; pdb.set_trace()
-#     preds = pred.logits.argmax(-1)
-#     precision, recall, f1, _ = precision_recall_fscore_support(labels, preds, average='binary')
-#     accuracy = accuracy_score(labels, preds)
-#     return {
-#         'accuracy': accuracy,
-#         'precision': precision,
-#         'recall': recall,
-#         'f1': f1
-#     }
+def compute_metrics(pred):
+    labels = pred.label_ids
+    preds = pred.preds.argmax(-1)
+    precision, recall, f1, _ = precision_recall_fscore_support(labels, preds, average='binary')
+    accuracy = accuracy_score(labels, preds)
+    return {
+        'accuracy': accuracy,
+        'precision': precision,
+        'recall': recall,
+        'f1': f1
+    }
 
 def main():
     tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/sentence-t5-base")
@@ -97,11 +96,11 @@ def main():
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
-        # compute_metrics=compute_metrics,
+        compute_metrics=compute_metrics,
         data_collator=DataCollatorWithPadding(tokenizer=tokenizer, pad_to_multiple_of=None),
         callbacks=[LoggingCallback()]
     )
-    # trainer.evaluate()
+    trainer.evaluate()
     trainer.train()
     eval_result = trainer.evaluate(test_dataset)
     print(eval_result)

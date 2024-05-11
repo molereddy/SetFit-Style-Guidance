@@ -45,7 +45,7 @@ def prepare_split(data_path, split, tokenizer, cut=False):
 
         return tokenized_outputs
 
-    dataset = dataset.map(tokenize_function, batched=True)
+    dataset = dataset.map(tokenize_function, batched=True, remove_columns=['text'])
     return dataset
 
 
