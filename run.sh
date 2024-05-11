@@ -23,7 +23,7 @@ cd /work/pi_dhruveshpate_umass_edu/amekala_umass_edu/
 cd tf-gyfac-classifier
 TZ="America/New_York" date
 
-python test.py
+python test.py > sample_results.txt
 # python train.py
 
 echo "Done"
