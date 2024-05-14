@@ -36,7 +36,7 @@ def show_random_elements(dataset, tokenizer, num_examples=5):
 
 def compute_metrics(pred):
     labels = pred.label_ids
-    preds = pred.preds.argmax(-1)
+    preds = pred.predictions.argmax(-1)
     precision, recall, f1, _ = precision_recall_fscore_support(labels, preds, average='binary')
     accuracy = accuracy_score(labels, preds)
     return {
@@ -47,13 +47,12 @@ def compute_metrics(pred):
     }
 
 def main():
-    tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/sentence-t5-base")
+    hf_key = "t5-base"
+    tokenizer = AutoTokenizer.from_pretrained(hf_key)
     NUM_LABELS = 2
-
-    logging.set_verbosity_error()
-    model = AutoModelForSequenceClassification.from_pretrained("sentence-transformers/sentence-t5-base", num_labels=NUM_LABELS)
-    logging.set_verbosity_warning()
+    model = AutoModelForSequenceClassification.from_pretrained(hf_key, num_labels=NUM_LABELS)
     
+    seed, val_split, cut_k = 1, 0.05, 2
     train_dataset, val_dataset, test_dataset = load_gyfac(tokenizer, seed=1, val_split=0.05, cut=True)
     show_random_elements(train_dataset, tokenizer)
     
@@ -68,28 +67,25 @@ def main():
     eval_steps = log_steps*4
     save_steps = eval_steps
     
-    
     training_args = TrainingArguments(
-        output_dir=os.path.join('results'),
+        output_dir=os.path.join(f'results_{seed}_{val_split}_{cut_k}'),
         num_train_epochs=num_epochs,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=256,
         gradient_accumulation_steps=gradient_accumulation_steps,
         warmup_steps=500,
         max_steps=max_steps,
-        # learning_rate=3e-4,
         weight_decay=0.01,
-        logging_dir=os.path.join('logs'),
+        logging_dir=os.path.join(f'logs'),
         evaluation_strategy="steps",
         eval_steps=eval_steps,
         logging_strategy="steps",
         logging_steps=log_steps,
-        save_strategy="steps",  # Changed to match eval_strategy
+        save_strategy="steps",
         save_steps=save_steps,
         load_best_model_at_end=True,
         save_total_limit=1,
     )
-
 
     trainer = Trainer(
         model=model,
@@ -100,7 +96,7 @@ def main():
         data_collator=DataCollatorWithPadding(tokenizer=tokenizer, pad_to_multiple_of=None),
         callbacks=[LoggingCallback()]
     )
-    trainer.evaluate()
+    # trainer.evaluate()
     trainer.train()
     eval_result = trainer.evaluate(test_dataset)
     print("GYFAC test result", eval_result)
