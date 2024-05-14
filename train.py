@@ -36,7 +36,9 @@ def show_random_elements(dataset, tokenizer, num_examples=5):
 
 def compute_metrics(pred):
     labels = pred.label_ids
-    preds = pred.predictions.argmax(-1)
+    preds = pred.predictions[0].argmax(-1)
+    # guessing the first attribute of predictions has logits
+    # https://discuss.huggingface.co/t/using-trainer-class-with-t5-what-is-returned-in-evalprediction-dict/1041/4
     precision, recall, f1, _ = precision_recall_fscore_support(labels, preds, average='binary')
     accuracy = accuracy_score(labels, preds)
     return {
@@ -47,18 +49,22 @@ def compute_metrics(pred):
     }
 
 def main():
-    hf_key = "t5-base"
-    tokenizer = T5Tokenizer.from_pretrained(hf_key, use_fast = True)
-    NUM_LABELS = 2
-    model = AutoModelForSequenceClassification.from_pretrained(hf_key, num_labels=NUM_LABELS)
-    
-    seed, val_split, cut_k = 1, 0.05, 2
-    train_dataset, val_dataset, test_dataset = load_gyfac(tokenizer, seed=1, val_split=0.05, cut_k=True)
-    show_random_elements(train_dataset, tokenizer)
     
     num_epochs = 3
-    batch_size = 30
-    gradient_accumulation_steps = 1
+    batch_size = 24
+    gradient_accumulation_steps = 2
+    
+    seed, val_split, cut_k = 1, 0.05, 0
+    hf_key = "t5-base"
+    NUM_LABELS = 2
+    tokenizer = T5Tokenizer.from_pretrained(hf_key, use_fast=True)
+    model = AutoModelForSequenceClassification.from_pretrained(hf_key, num_labels=NUM_LABELS)
+    
+    train_dataset, val_dataset, test_dataset = load_gyfac(tokenizer, seed=seed, 
+                                                          val_split=val_split, 
+                                                          cut_k=cut_k)
+    show_random_elements(train_dataset, tokenizer)
+    
     steps_per_epoch = len(train_dataset)//(batch_size*gradient_accumulation_steps)
     print(f"steps_per_epoch:\t{steps_per_epoch}")
     max_steps = int(num_epochs*len(train_dataset))//(batch_size*gradient_accumulation_steps)

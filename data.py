@@ -24,13 +24,14 @@ def read_gyfac_split(data_path, split='train'):
     texts, labels = zip(*combined)
     return texts, labels
 
-def prepare_split(data_path, split, tokenizer, cut_k=2, ):
+def prepare_split(data_path, split, tokenizer, cut_k=0):
     texts, labels = read_gyfac_split(data_path, split)
     data_dict = {"text": texts, "label": labels}
     dataset = Dataset.from_dict(data_dict)
-    avg_sequence_length = np.mean([len(seq['input_ids']) for seq in dataset])
-    print(f"Average sequence length: {avg_sequence_length}")
-
+    
+    if cut_k>0:
+        print(f"cutting sequences chi-squared({cut_k})")
+    
     def tokenize_function(examples):
         tokenized_outputs = tokenizer(examples["text"], truncation=True, padding=False)
         if cut_k==0:
@@ -49,20 +50,27 @@ def prepare_split(data_path, split, tokenizer, cut_k=2, ):
         return tokenized_outputs
 
     dataset = dataset.map(tokenize_function, batched=True, remove_columns=['text'])
-
+    for seq in dataset:
+        print(seq.keys())
+        break
+    avg_sequence_length = np.mean([len(seq['input_ids']) for seq in dataset])
+    print(f"Average sequence length after: {avg_sequence_length}")
+    
     return dataset
 
 
 
-def load_gyfac(tokenizer, data_path = "/work/pi_dhruveshpate_umass_edu/project_18/gyfac_pilot", seed=1, val_split=0.05, cut_k=0):
+def load_gyfac(tokenizer, data_path = "/work/pi_dhruveshpate_umass_edu/project_18/gyfac_pilot", seed=1, val_split=0.05, cut_k=0, refresh=False):
     directory = f"{seed}_{val_split}_{cut_k}"
     full_path = os.path.join(data_path, directory)
     
-    if os.path.exists(full_path):
+    if os.path.exists(full_path) or not refresh:
+        print("loading from saved dataset")
         train_dataset = load_from_disk(os.path.join(full_path, "train_dataset"))
         val_dataset = load_from_disk(os.path.join(full_path, "val_dataset"))
         test_dataset = load_from_disk(os.path.join(full_path, "test_dataset"))
     else:
+        print("preparing split newly")
         full_train_dataset = prepare_split(data_path, "train", tokenizer, cut_k)
         train_splits = full_train_dataset.train_test_split(test_size=val_split, shuffle=True, seed=seed)
         train_dataset = train_splits["train"]
