@@ -1,4 +1,4 @@
-import os
+import os, sys
 import random
 from pathlib import Path
 import pandas as pd
@@ -72,31 +72,45 @@ def evaluate_model(model, test_dataset, batch_size, collator):
     print(f"Precision: {precision:.4f}, Recall: {recall:.4f}, F1-Score: {f1:.4f}, Accuracy: {accuracy:.4f}")
 
 test_samples = [
+    {"text": "Hey, what’s up? Just got a new phone, it's so cool!", "label": 1},
+    {"text": "Gonna grab some coffee, wanna join?", "label": 1},
+    {"text": "Lol, did you see that cat video? Hilarious!", "label": 1},
+    {"text": "I can't believe it's already Friday! Time flies.", "label": 1},
+    {"text": "Y’all ready for the game tonight? It’s gonna be epic!", "label": 1},
+    {"text": "Just chilling at home, what about you?", "label": 1},
+    {"text": "OMG, this pizza is amazing! Best I've ever had.", "label": 1},
+    {"text": "Can't wait for the weekend, got so many plans!", "label": 1},
+    {"text": "Ugh, I hate Mondays. Wish weekends were longer.", "label": 1},
+    {"text": "Do you know any good places to hang out around here?", "label": 1},
     {"text": "The company launched its new product last week; it's expected to significantly increase market share.", "label": 0},
-    {"text": "Local weather forecast predicts rain for the entire weekend.", "label": 1},
+    {"text": "Local weather forecast predicts rain for the entire weekend.", "label": 0},
     {"text": "Annual revenue exceeded expectations by 15%, marking a notable success in the fiscal year.", "label": 0},
-    {"text": "The construction project down by the river will wrap up by late fall.", "label": 1},
+    {"text": "The construction project down by the river will wrap up by late fall.", "label": 0},
     {"text": "Observations confirm that the migration patterns are shifting earlier each year.", "label": 0},
-    {"text": "He’s always late to meetings, isn’t he?", "label": 1},
     {"text": "Further research is required to understand the implications of this change fully.", "label": 0},
-    {"text": "Cats are known for their independence compared to other pets.", "label": 1},
-    {"text": "The latest novel by the author was released to critical acclaim but mixed audience reviews.", "label": 0},
-    {"text": "Make sure to check out the new cafe downtown—they’ve got the best coffee!", "label": 1}
+    {"text": "The latest novel by the author was released to critical acclaim but mixed audience reviews.", "label": 0}
 ]
+
 
 def main():
     hf_key = "t5-base"
     tokenizer = T5Tokenizer.from_pretrained(hf_key, use_fast=True)
     NUM_LABELS = 2
-    model_path = "best_model"
+    seed, val_split, cut_k = 1, 0.05, 0
+    model_path = "results_1_0.05_0/b_checkpoint-3744"
     model = AutoModelForSequenceClassification.from_pretrained(model_path, num_labels=NUM_LABELS)
 
-    _, _, test_dataset = load_gyfac(tokenizer, seed=1, val_split=0.05, cut_k=True)
-    show_random_elements(test_dataset, tokenizer)
-    batch_size = 512
+    _, _, test_dataset = load_gyfac(tokenizer, seed=seed, val_split=val_split, cut_k=cut_k)
+    batch_size = 256
     data_collator = DataCollatorWithPadding(tokenizer=tokenizer, pad_to_multiple_of=None)
-    evaluate_model(model, test_dataset, batch_size, data_collator)
-    evaluate_sample_by_sample(model, test_samples, tokenizer)
+    
+    log_file_path = os.path.join(model_path, "eval_logs.txt")
+    with open(log_file_path, "w") as f:
+        sys.stdout = f
+
+        show_random_elements(test_dataset, tokenizer)
+        evaluate_model(model, test_dataset, batch_size, data_collator)
+        evaluate_sample_by_sample(model, test_samples, tokenizer)
     
 if __name__ == "__main__":
     main()

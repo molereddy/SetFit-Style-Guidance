@@ -42,10 +42,10 @@ def compute_metrics(pred):
     precision, recall, f1, _ = precision_recall_fscore_support(labels, preds, average='binary')
     accuracy = accuracy_score(labels, preds)
     return {
-        'accuracy': accuracy,
-        'precision': precision,
-        'recall': recall,
-        'f1': f1
+        'accuracy': round(accuracy*100,1),
+        'precision': round(precision*100,1),
+        'recall': round(recall*100,1),
+        'f1': round(f1*100,1)
     }
 
 def main():
