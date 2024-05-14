@@ -11,7 +11,6 @@ import torch
 import transformers
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 
-!pip install git+https://github.com/molereddy/token-level-setfit.git
 
 from transformers import LogitsProcessor,LogitsProcessorList
 class ClassifierGuidance(LogitsProcessor):

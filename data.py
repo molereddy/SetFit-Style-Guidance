@@ -2,7 +2,7 @@ import os
 import random
 import numpy as np
 from datasets import load_from_disk, Dataset
-from transformers import AutoTokenizer
+from transformers import T5Tokenizer
 from tqdm import tqdm
 
 def set_seed(seed):
@@ -87,9 +87,10 @@ def main():
     cut_k = 2
     set_seed(seed)
     
-    tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/sentence-t5-base")
+    hf_key = "t5-base"
+    tokenizer = T5Tokenizer.from_pretrained(hf_key, use_fast=True)
     data_path = "/work/pi_dhruveshpate_umass_edu/project_18/gyfac_pilot"
-    train_dataset, val_dataset, test_dataset = load_gyfac(tokenizer, data_path, seed, val_split, cut)
+    train_dataset, val_dataset, test_dataset = load_gyfac(tokenizer, data_path, seed, val_split, cut_k)
 
 if __name__ == "__main__":
     main()

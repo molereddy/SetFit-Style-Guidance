@@ -3,7 +3,7 @@ import random
 from pathlib import Path
 import pandas as pd
 import torch
-from transformers import AutoTokenizer, AutoModelForSequenceClassification, logging, DataCollatorWithPadding
+from transformers import T5Tokenizer, AutoModelForSequenceClassification, logging, DataCollatorWithPadding
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 from data import load_gyfac
 
@@ -85,13 +85,13 @@ test_samples = [
 ]
 
 def main():
-    hf_key = "tf-base"
-    tokenizer = AutoTokenizer.from_pretrained("t5-base")
+    hf_key = "t5-base"
+    tokenizer = T5Tokenizer.from_pretrained(hf_key, use_fast=True)
     NUM_LABELS = 2
     model_path = "best_model"
     model = AutoModelForSequenceClassification.from_pretrained(model_path, num_labels=NUM_LABELS)
 
-    _, _, test_dataset = load_gyfac(tokenizer, seed=1, val_split=0.05, cut=True)
+    _, _, test_dataset = load_gyfac(tokenizer, seed=1, val_split=0.05, cut_k=True)
     show_random_elements(test_dataset, tokenizer)
     batch_size = 512
     data_collator = DataCollatorWithPadding(tokenizer=tokenizer, pad_to_multiple_of=None)

@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 
 import torch
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from transformers import T5Tokenizer, AutoModelForSequenceClassification
 from transformers import Trainer, TrainingArguments, logging, DataCollatorWithPadding, TrainerCallback
 
 from data import load_gyfac
@@ -48,12 +48,12 @@ def compute_metrics(pred):
 
 def main():
     hf_key = "t5-base"
-    tokenizer = AutoTokenizer.from_pretrained(hf_key)
+    tokenizer = T5Tokenizer.from_pretrained(hf_key, use_fast = True)
     NUM_LABELS = 2
     model = AutoModelForSequenceClassification.from_pretrained(hf_key, num_labels=NUM_LABELS)
     
     seed, val_split, cut_k = 1, 0.05, 2
-    train_dataset, val_dataset, test_dataset = load_gyfac(tokenizer, seed=1, val_split=0.05, cut=True)
+    train_dataset, val_dataset, test_dataset = load_gyfac(tokenizer, seed=1, val_split=0.05, cut_k=True)
     show_random_elements(train_dataset, tokenizer)
     
     num_epochs = 3
