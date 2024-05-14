@@ -24,17 +24,20 @@ def read_gyfac_split(data_path, split='train'):
     texts, labels = zip(*combined)
     return texts, labels
 
-def prepare_split(data_path, split, tokenizer, cut=False):
+def prepare_split(data_path, split, tokenizer, cut_k=2, ):
     texts, labels = read_gyfac_split(data_path, split)
     data_dict = {"text": texts, "label": labels}
     dataset = Dataset.from_dict(data_dict)
+    avg_sequence_length = np.mean([len(seq['input_ids']) for seq in dataset])
+    print(f"Average sequence length: {avg_sequence_length}")
 
     def tokenize_function(examples):
         tokenized_outputs = tokenizer(examples["text"], truncation=True, padding=False)
-        if not cut:
+        if cut_k==0:
             return tokenized_outputs
+        
         # cut it according to a chi-squared distribution
-        truncation_lengths = np.floor(np.random.chisquare(1, size=len(examples["text"]))).astype(int)
+        truncation_lengths = np.floor(np.random.chisquare(cut_k, size=len(examples["text"]))).astype(int)
         original_lengths = [len(sequence)-1 for sequence in tokenized_outputs["input_ids"]] # original length without eos
 
         for i in range(len(tokenized_outputs["input_ids"])):
@@ -46,12 +49,13 @@ def prepare_split(data_path, split, tokenizer, cut=False):
         return tokenized_outputs
 
     dataset = dataset.map(tokenize_function, batched=True, remove_columns=['text'])
+
     return dataset
 
 
 
-def load_gyfac(tokenizer, data_path = "/work/pi_dhruveshpate_umass_edu/project_18/gyfac_pilot", seed=1, val_split=0.05, cut=False):
-    directory = f"{seed}_{val_split}_{cut}"
+def load_gyfac(tokenizer, data_path = "/work/pi_dhruveshpate_umass_edu/project_18/gyfac_pilot", seed=1, val_split=0.05, cut_k=0):
+    directory = f"{seed}_{val_split}_{cut_k}"
     full_path = os.path.join(data_path, directory)
     
     if os.path.exists(full_path):
@@ -59,11 +63,11 @@ def load_gyfac(tokenizer, data_path = "/work/pi_dhruveshpate_umass_edu/project_1
         val_dataset = load_from_disk(os.path.join(full_path, "val_dataset"))
         test_dataset = load_from_disk(os.path.join(full_path, "test_dataset"))
     else:
-        full_train_dataset = prepare_split(data_path, "train", tokenizer, cut)
+        full_train_dataset = prepare_split(data_path, "train", tokenizer, cut_k)
         train_splits = full_train_dataset.train_test_split(test_size=val_split, shuffle=True, seed=seed)
         train_dataset = train_splits["train"]
         val_dataset = train_splits["test"]
-        test_dataset = prepare_split(data_path, "test", tokenizer, cut)
+        test_dataset = prepare_split(data_path, "test", tokenizer, cut_k)
         
         if not os.path.exists(full_path):
             os.makedirs(full_path)
@@ -80,7 +84,7 @@ def load_gyfac(tokenizer, data_path = "/work/pi_dhruveshpate_umass_edu/project_1
 def main():
     seed = 1
     val_split = 0.05
-    cut=True
+    cut_k = 2
     set_seed(seed)
     
     tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/sentence-t5-base")

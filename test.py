@@ -22,7 +22,7 @@ def evaluate_sample_by_sample(model, dataset, tokenizer):
         
         print(f"Text: {example['text']}")
         print(f"True Label: {example['label']}, Predicted Label: {predicted_label}")
-        print("\n---\n")
+        print("---")
 
 def show_random_elements(dataset, tokenizer, num_examples=5):
     assert num_examples <= len(dataset), "Can't pick more elements than there are in the dataset."
@@ -51,8 +51,6 @@ def evaluate_model(model, test_dataset, batch_size, collator):
     true_labels = []
     predictions = []
     
-    test_dataset=test_dataset.remove_columns(['text'])
-    print(test_dataset.column_names)
     dataloader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, collate_fn=collator)
     
     with torch.no_grad():
@@ -87,17 +85,17 @@ test_samples = [
 ]
 
 def main():
-    tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/sentence-t5-base")
+    hf_key = "tf-base"
+    tokenizer = AutoTokenizer.from_pretrained("t5-base")
     NUM_LABELS = 2
-
     model_path = "best_model"
     model = AutoModelForSequenceClassification.from_pretrained(model_path, num_labels=NUM_LABELS)
 
-    # _, _, test_dataset = load_gyfac(tokenizer, seed=1, val_split=0.05, cut=True)
-    # show_random_elements(test_dataset, tokenizer)
-    # batch_size = 512
-    # data_collator = DataCollatorWithPadding(tokenizer=tokenizer, pad_to_multiple_of=None)
-    # evaluate_model(model, test_dataset, batch_size, data_collator)
+    _, _, test_dataset = load_gyfac(tokenizer, seed=1, val_split=0.05, cut=True)
+    show_random_elements(test_dataset, tokenizer)
+    batch_size = 512
+    data_collator = DataCollatorWithPadding(tokenizer=tokenizer, pad_to_multiple_of=None)
+    evaluate_model(model, test_dataset, batch_size, data_collator)
     evaluate_sample_by_sample(model, test_samples, tokenizer)
     
 if __name__ == "__main__":
