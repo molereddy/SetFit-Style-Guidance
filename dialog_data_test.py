@@ -166,7 +166,7 @@ from sentence_transformers.losses import CosineSimilarityLoss
 from setfit import SetFitModel, SetFitTrainer
 
 # load the models
-tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-base", use_fast=True)
+tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-base", use_fast=True, legacy=True)
 model_id = "Vamsi/T5_Paraphrase_Paws"
 model = T5ForConditionalGeneration.from_pretrained(model_id)
 

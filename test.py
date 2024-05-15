@@ -94,7 +94,7 @@ test_samples = [
 
 def main():
     hf_key = "t5-base"
-    tokenizer = T5Tokenizer.from_pretrained(hf_key, use_fast=True)
+    tokenizer = T5Tokenizer.from_pretrained(hf_key, use_fast=True, legacy=True)
     NUM_LABELS = 2
     seed, val_split, cut_k = 1, 0.05, 0
     model_path = "results_1_0.05_0/b_checkpoint-3744"

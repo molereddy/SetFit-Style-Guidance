@@ -96,7 +96,7 @@ def main():
     set_seed(seed)
     
     hf_key = "t5-base"
-    tokenizer = T5Tokenizer.from_pretrained(hf_key, use_fast=True)
+    tokenizer = T5Tokenizer.from_pretrained(hf_key, use_fast=True, legacy=True, legacy=True)
     data_path = "/work/pi_dhruveshpate_umass_edu/project_18/gyfac_pilot"
     train_dataset, val_dataset, test_dataset = load_gyfac(tokenizer, data_path, seed, val_split, cut_k)
 

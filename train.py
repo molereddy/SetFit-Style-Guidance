@@ -57,7 +57,7 @@ def main():
     seed, val_split, cut_k = 1, 0.05, 0
     hf_key = "t5-base"
     NUM_LABELS = 2
-    tokenizer = T5Tokenizer.from_pretrained(hf_key, use_fast=True)
+    tokenizer = T5Tokenizer.from_pretrained(hf_key, use_fast=True, legacy=True)
     model = AutoModelForSequenceClassification.from_pretrained(hf_key, num_labels=NUM_LABELS)
     
     train_dataset, val_dataset, test_dataset = load_gyfac(tokenizer, seed=seed, 
