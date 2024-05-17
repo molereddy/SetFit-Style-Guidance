@@ -1,0 +1,31 @@
+{
+    "Doc_length": 500,
+    "paraphrase": {
+        "entail_count": 402,
+        "entail_percent": 80.4
+    },
+    "formal_10": {
+        "entail_count": 305,
+        "entail_percent": 61.0
+    },
+    "formal_15": {
+        "entail_count": 285,
+        "entail_percent": 56.99999999999999
+    },
+    "formal_20": {
+        "entail_count": 274,
+        "entail_percent": 54.800000000000004
+    },
+    "informal_10": {
+        "entail_count": 90,
+        "entail_percent": 18.0
+    },
+    "informal_15": {
+        "entail_count": 92,
+        "entail_percent": 18.4
+    },
+    "informal_20": {
+        "entail_count": 104,
+        "entail_percent": 20.8
+    }
+}
