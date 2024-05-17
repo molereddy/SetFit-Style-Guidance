@@ -3,5 +3,6 @@ pandas
 scikit-learn
 torch
 transformers
+sentencepiece
 sentence_transformers
 datasets
