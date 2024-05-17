@@ -1,0 +1,24 @@
+{
+    "Doc_length": 500,
+    "original": {
+        "formal_score": -0.2821224715998396
+    },
+    "formal_10": {
+        "formal_score": -0.21960442197462543
+    },
+    "formal_15": {
+        "formal_score": -0.19895592759130523
+    },
+    "formal_20": {
+        "formal_score": -0.18425187460472808
+    },
+    "informal_10": {
+        "formal_score": -1.4213603122616187
+    },
+    "informal_15": {
+        "formal_score": -1.5456707061119377
+    },
+    "informal_20": {
+        "formal_score": -1.6030160469189285
+    }
+}
