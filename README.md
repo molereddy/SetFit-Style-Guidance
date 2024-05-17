@@ -11,10 +11,13 @@ Install
 ```
 pip install -r requirements.txt
 pip install git+https://github.com/molereddy/token-level-setfit.git
+pip install sentence_transformers
 ```
 
-`regressor.py` trains and does sample evaluations for BERT-based formality regression model on the [Pavlick formality dataset](https://huggingface.co/datasets/osyvokon/pavlick-formality-scores). Its classifier counterpart is the gold classifier [model](https://huggingface.co/s-nlp/deberta-large-formality-ranker) trained on GYAFC based on the DeBERTa architecture.
+`bert_regressor_train.py` trains a BERT-based formality regression model on the [Pavlick formality dataset](https://huggingface.co/datasets/osyvokon/pavlick-formality-scores). `bert_regressor_eval.py` uses this trained model to evaluate the generations. Its classifier evaluation counterpart is [model](https://huggingface.co/s-nlp/deberta-large-formality-ranker) trained on GYAFC based on the DeBERTa architecture.
 
 `gold_classifier.py` trains with and does sample evaluations for encoder-decoder T5-based formality classifier model on the [GYAFC dataset](https://arxiv.org/abs/1803.06535). GYAFC is not publicly available, please contact the authors.
+
+`setftit_classifier.py` trains the T5 based model (fewshot) on [GYAFC dataset](https://arxiv.org/abs/1803.06535), which is used to guide our generative architecture. 
 
 Paraphrasing quality is evaluated with a [RoBERTa based paraphrase ranker](https://huggingface.co/cross-encoder/nli-roberta-base) from the SentenceTransformers package.
