@@ -1,9 +1,8 @@
 import torch, os, random
 import pandas as pd
 from transformers import BertTokenizer, BertModel, BertForSequenceClassification, Trainer, TrainingArguments, BertConfig
-from data import prepare_pavlick_formality, set_seed
+from data import prepare_pavlick_formality, set_seed, show_random_elements
 from transformers import logging, DataCollatorWithPadding, TrainerCallback
-from train import show_random_elements
 
 class LoggingCallback(TrainerCallback):
     def on_evaluate(self, args, state, control, metrics=None, **kwargs):

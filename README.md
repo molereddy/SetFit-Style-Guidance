@@ -8,3 +8,7 @@ Install
 pip install -r requirements.txt
 pip install git+https://github.com/molereddy/token-level-setfit.git
 ```
+
+`regressor.py` trains and does sample evaluations for BERT-based formality regression model on the [Pavlick formality dataset](https://huggingface.co/datasets/osyvokon/pavlick-formality-scores).
+
+`gold_classifier.py` trains with and does sample evaluations for encoder-decoder T5-based formality classifier model on the [GYAFC dataset](https://arxiv.org/abs/1803.06535). GYAFC is not publicly available, please contact the authors.

@@ -10,6 +10,25 @@ def set_seed(seed):
     np.random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
 
+def show_random_elements(dataset, tokenizer, num_examples=5):
+    assert num_examples <= len(dataset), "Can't pick more elements than there are in the dataset."
+    picks = []
+    for _ in range(num_examples):
+        pick = random.randint(0, len(dataset)-1)
+        while pick in picks:
+            pick = random.randint(0, len(dataset)-1)
+        picks.append(pick)
+    examples = []
+    for pick in picks:
+        example = dataset[pick]
+        sentence = tokenizer.decode(example['input_ids'], skip_special_tokens=True)
+        label = example['label']
+        examples.append({'Sentence': sentence, 'Label': label})
+    
+    pd.set_option('display.max_colwidth', None)
+    df = pd.DataFrame(examples)
+    print(df)
+
 def prepare_pavlick_formality(tokenizer, seed=42, refresh=False):
     def preprocess_dataset_cols(dataset):
         dataset = dataset.rename_column("avg_score", "label")
