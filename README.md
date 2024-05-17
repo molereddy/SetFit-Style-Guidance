@@ -1,6 +1,6 @@
-## Classifier-guided style constrained generation via SetFit.
+# Classifier-guided style constrained generation via SetFit.
 
-# COMPSCI 685 course project 
+## COMPSCI 685 course project 
 
 We follow [FUDGE](https://arxiv.org/pdf/2104.05218)'s future classifier guided generator framework and optimize it with a [SetFit](https://arxiv.org/pdf/2209.11055)-based classifier for label-efficiency.
 
