@@ -1,7 +1,7 @@
 import os
 import random
 import numpy as np
-from datasets import load_from_disk, Dataset
+from datasets import load_from_disk, Dataset, load_dataset
 from transformers import T5Tokenizer
 from tqdm import tqdm
 
@@ -10,7 +10,7 @@ def set_seed(seed):
     np.random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
 
-def prepare_pavlick_formality(tokenizer, refresh=False):
+def prepare_pavlick_formality(tokenizer, seed=42, refresh=False):
     def preprocess_dataset_cols(dataset):
         dataset = dataset.rename_column("avg_score", "label")
         dataset = dataset.remove_columns(["domain", "sentence"])
@@ -21,7 +21,7 @@ def prepare_pavlick_formality(tokenizer, refresh=False):
 
     data_path = "/work/pi_dhruveshpate_umass_edu/project_18/pavlick"
 
-    if os.path.exists(data_path) and not refresh:
+    if os.path.exists(os.path.join(data_path, "train_dataset")) and not refresh:
         print("loading from saved dataset")
         train_dataset = load_from_disk(os.path.join(data_path, "train_dataset"))
         val_dataset = load_from_disk(os.path.join(data_path, "val_dataset"))

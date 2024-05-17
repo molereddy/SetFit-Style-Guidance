@@ -1,6 +1,5 @@
 __pycache__/
-results*/
+results*
 logs*/
 best_model*/
-*.txt
 *.sh
