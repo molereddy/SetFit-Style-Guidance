@@ -20,6 +20,6 @@ pip install sentence_transformers
 
 `setftit_classifier.py` trains the T5 based model (fewshot) on [GYAFC dataset](https://arxiv.org/abs/1803.06535), which is used to guide our generative architecture. 
 
-Paraphrasing quality is evaluated with a [RoBERTa based paraphrase ranker](https://huggingface.co/cross-encoder/nli-roberta-base) from the SentenceTransformers package.
+Paraphrasing quality is evaluated with a [RoBERTa based paraphrase ranker](https://huggingface.co/cross-encoder/nli-roberta-base) from the SentenceTransformers package, in `roberta_evaluator.py`.
 
 `setfit_T5_fudge.py` consists of the T5 generator and a classifier for guidance, generates the style-guided sentences.
