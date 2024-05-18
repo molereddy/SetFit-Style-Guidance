@@ -22,13 +22,17 @@ pip install sentence_transformers
 
 Paraphrasing quality is evaluated with a [RoBERTa based paraphrase ranker](https://huggingface.co/cross-encoder/nli-roberta-base) from the SentenceTransformers package, in `roberta_evaluator.py`.
 
-`setfit_T5_fudge.py` consists of the T5 generator and a classifier for guidance, generates the style-guided sentences.
+`fudge_T5_setfit.py` consists of the T5 generator and a classifier for guidance, generates the style-guided sentences.
 
 SETFIT Classifier training
 ```
 # To train the setfit classifier for guidance, run the file as shown below
 # -p base_path -f formal_data_file -if informal_data_file -n number_of_fewshot_examples_per_class
-python setfit_classifier.py -p "gyfac_pilot" -f "shuffled_gyfac50_0.txt" -if "shuffled_gyfac50_1.txt" -n 40
+python setfit_classifier.py \
+    -p "gyfac_pilot" \
+    -f "shuffled_gyfac50_0.txt" \
+    -if "shuffled_gyfac50_1.txt" \
+    -n 40
 ```
 
 Sentence Generation 
@@ -46,10 +50,14 @@ Evaluation on the Generated sentences
 ```
 # To evaluate the formality of the generated sentences (in summary.csv), run the classifiers as shown below
 # -fp file_path
-python deberta_evaluator.py -fp "generation_results_V1/humarin/setfit_gyfac_partial_40/daily_dialog/summary.csv"
-python bert_regressor_eval.py -fp "generation_results_V1/humarin/setfit_gyfac_partial_40/daily_dialog/summary.csv"
+python deberta_evaluator.py \
+    -fp "generation_results_V1/humarin/setfit_gyfac_partial_40/daily_dialog/summary.csv"
+
+python bert_regressor_eval.py \
+    -fp "generation_results_V1/humarin/setfit_gyfac_partial_40/daily_dialog/summary.csv"
 
 # To evaluate the content preservation of the generated sentences (in summary.csv), run the classifier as shown below
 # -fp file_path
-python gs_paraphrase_classifier.py -fp "generation_results/humarin/setfit_gyfac_partial_40/daily_dialog/summary.csv"
+python gs_paraphrase_classifier.py \
+    -fp "generation_results/humarin/setfit_gyfac_partial_40/daily_dialog/summary.csv"
 ```
