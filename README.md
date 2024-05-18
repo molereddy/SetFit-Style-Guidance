@@ -11,7 +11,6 @@ Install
 ```
 pip install -r requirements.txt
 pip install git+https://github.com/molereddy/token-level-setfit.git
-pip install sentence_transformers
 ```
 
 `bert_regressor_train.py` trains a BERT-based formality regression model on the [Pavlick formality dataset](https://huggingface.co/datasets/osyvokon/pavlick-formality-scores). `bert_regressor_eval.py` uses this trained model to evaluate the generations. Its classifier evaluation counterpart, `deberta_evaluator.py`, is a [model](https://huggingface.co/s-nlp/deberta-large-formality-ranker) trained on [GYAFC dataset](https://arxiv.org/abs/1803.06535) using DeBERTa architecture. 
