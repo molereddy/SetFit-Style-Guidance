@@ -24,7 +24,25 @@ Paraphrasing quality is evaluated with a [RoBERTa based paraphrase ranker](https
 
 `setfit_T5_fudge.py` consists of the T5 generator and a classifier for guidance, generates the style-guided sentences.
 
+SETFIT Classifier training
+```
+# To train the setfit classifier for guidance, run the file as shown below
+# -p base_path -f formal_data_file -if informal_data_file -n number_of_fewshot_examples_per_class
+python setfit_classifier.py -p "gyfac_pilot" -f "shuffled_gyfac50_0.txt" -if "shuffled_gyfac50_1.txt" -n 40
+```
 
+Sentence Generation 
+```
+# To generate the sentences using our architecture, run the file as shown below
+python fudge_T5_setfit.py \
+    --generation_model_name "humarin" \
+    --classifier_model_name "setfit_gyfac_partial_40" \
+    --dataset_name "daily_dialog" \
+    --samples 500 \
+    --batch_size 32 \
+    --results_dir "generation_results"
+```
+Evaluation on the Generated sentences
 ```
 # To evaluate the formality of the generated sentences (in summary.csv), run the classifiers as shown below
 # -fp file_path
@@ -34,18 +52,4 @@ python bert_regressor_eval.py -fp "generation_results_V1/humarin/setfit_gyfac_pa
 # To evaluate the content preservation of the generated sentences (in summary.csv), run the classifier as shown below
 # -fp file_path
 python gs_paraphrase_classifier.py -fp "generation_results/humarin/setfit_gyfac_partial_40/daily_dialog/summary.csv"
-
-# To train the setfit classifier for guidance, run the file as shown below
-# -p base_path -f formal_data_file -if informal_data_file -n number_of_fewshot_examples_per_class
-python setfit_classifier.py -p "gyfac_pilot" -f "shuffled_gyfac50_0.txt" -if "shuffled_gyfac50_1.txt" -n 40
-
-# To generate the sentences using our architecture, run the file as shown below
-python fudge_T5_setfit.py \
-    --generation_model_name "humarin" \
-    --classifier_model_name "setfit_gyfac_partial_40" \
-    --dataset_name "daily_dialog" \
-    --samples 500 \
-    --batch_size 32 \
-    --results_dir "generation_results"
-
 ```
