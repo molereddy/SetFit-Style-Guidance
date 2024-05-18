@@ -15,7 +15,7 @@ pip install git+https://github.com/molereddy/token-level-setfit.git
 
 `bert_regressor_train.py` trains a BERT-based formality regression model on the [Pavlick formality dataset](https://huggingface.co/datasets/osyvokon/pavlick-formality-scores). `bert_regressor_eval.py` uses this trained model to evaluate the generations. Its classifier evaluation counterpart, `deberta_evaluator.py`, is a [model](https://huggingface.co/s-nlp/deberta-large-formality-ranker) trained on [GYAFC dataset](https://arxiv.org/abs/1803.06535) using DeBERTa architecture. 
 
-`gold_classifier.py` trains with and does sample evaluations for encoder-decoder T5-based formality classifier model on the [GYAFC dataset](https://arxiv.org/abs/1803.06535). GYAFC is not publicly available, please contact the authors.
+`t5_classifier.py` trains with and does sample evaluations for encoder-decoder T5-based formality classifier model on the [GYAFC dataset](https://arxiv.org/abs/1803.06535). GYAFC is not publicly available, please contact the authors.
 
 `setftit_classifier.py` trains the T5 based model (fewshot) on [GYAFC dataset](https://arxiv.org/abs/1803.06535), which is used to guide our generative architecture. 
 
