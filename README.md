@@ -17,7 +17,7 @@ pip install git+https://github.com/molereddy/token-level-setfit.git
 
 `t5_classifier.py` trains with and does sample evaluations for encoder-decoder T5-based formality classifier model on the [GYAFC dataset](https://arxiv.org/abs/1803.06535). GYAFC is not publicly available, please contact the authors.
 
-`setftit_classifier.py` trains the T5 based model (fewshot) on [GYAFC dataset](https://arxiv.org/abs/1803.06535), which is used to guide our generative architecture. 
+`setfit_classifier.py` trains the T5 based model (fewshot) on [GYAFC dataset](https://arxiv.org/abs/1803.06535), which is used to guide our generative architecture. 
 
 Paraphrasing quality is evaluated with a [RoBERTa based paraphrase ranker](https://huggingface.co/cross-encoder/nli-roberta-base) from the SentenceTransformers package, in `roberta_evaluator.py`.
 
@@ -53,7 +53,7 @@ Evaluation on the Generated sentences
 ```
 # To evaluate the formality of the generated sentences (in summary.csv), 
 
-python deberta_evaluator.py \
+python deberta_style_evaluator.py \
     -fp "generation_results/humarin/setfit_gyfac_partial_40/daily_dialog/summary.csv"
 
 python bert_regressor_eval.py \
@@ -63,6 +63,6 @@ python bert_regressor_eval.py \
 
 # To evaluate the content preservation of the generated sentences (in summary.csv),
 
-python roberta_evaluator.py \
+python roberta_nli_evaluator.py \
     -fp "generation_results/humarin/setfit_gyfac_partial_40/daily_dialog/summary.csv"
 ```
