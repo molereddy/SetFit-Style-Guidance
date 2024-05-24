@@ -4,13 +4,8 @@ import os
 import pandas as pd 
 import argparse
 import json
-
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, Trainer
-
-
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-
 
 class Classifier():
     def __init__(self) -> None:
@@ -84,8 +79,6 @@ class Classifier():
                 result[key] = res
         
         self.make_result_file(file, result)
-
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

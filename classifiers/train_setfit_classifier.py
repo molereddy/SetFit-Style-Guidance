@@ -75,9 +75,9 @@ class StyleClassifier():
         self.init_trainer(finetune_dataset)
         self.trainer.train()
         dataset = os.path.basename(file1).split('_')[0]
-        model_path = 'model_checkpoints/setfit/gyfac_finetuned_partial_' + str(n)
-        # if 'gyfac' in dataset:
-        #     model_path += 'gyfac_finetuned_partial_' + str(n)
+        model_path = 'model_checkpoints/setfit/gyafc_finetuned_partial_' + str(n)
+        # if 'gyafc' in dataset:
+        #     model_path += 'gyafc_finetuned_partial_' + str(n)
         # else:
         #     model_path += 'chatgpt_finetuned_partial_' + str(n)
         self.model.save_pretrained(model_path)

@@ -2,12 +2,12 @@ import os, random, sys
 from pathlib import Path
 import pandas as pd
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
-from data import load_gyfac
+from data import load_gyafc
 import torch
 from transformers import T5Tokenizer, AutoModelForSequenceClassification
 from transformers import Trainer, TrainingArguments, logging, DataCollatorWithPadding, TrainerCallback
 
-from data import load_gyfac, show_random_elements
+from data import load_gyafc, show_random_elements
 
 class LoggingCallback(TrainerCallback):
     def on_evaluate(self, args, state, control, metrics=None, **kwargs):
@@ -108,7 +108,7 @@ def main():
     tokenizer = T5Tokenizer.from_pretrained(hf_key, use_fast=True, legacy=True)
     model = AutoModelForSequenceClassification.from_pretrained(hf_key, num_labels=NUM_LABELS)
     
-    train_dataset, val_dataset, test_dataset = load_gyfac(tokenizer, seed=seed, 
+    train_dataset, val_dataset, test_dataset = load_gyafc(tokenizer, seed=seed, 
                                                           val_split=val_split, 
                                                           cut_k=cut_k)
     show_random_elements(train_dataset, tokenizer)
@@ -153,7 +153,7 @@ def main():
     # trainer.evaluate()
     trainer.train()
     eval_result = trainer.evaluate(test_dataset)
-    print("GYFAC test result", eval_result)
+    print("gyafc test result", eval_result)
     batch_size = 256
     data_collator = DataCollatorWithPadding(tokenizer=tokenizer, pad_to_multiple_of=None)
     

@@ -52,7 +52,7 @@ def evaluate_sentences_in_batches(model, tokenizer, sentences, batch_size=60):
     avg_score = sum(all_scores)/len(all_scores) if all_scores else 0
     return avg_score
 
-def read_gyfac_split(data_path, label=0, split='train'):
+def read_gyafc_split(data_path, label=0, split='train'):
     file_path = os.path.join(data_path, f"{split}_{label}.txt")
     with open(file_path, 'r') as file:
         sentences = [sentence.strip() for sentence in file.readlines()]
@@ -60,21 +60,6 @@ def read_gyfac_split(data_path, label=0, split='train'):
     return sentences
 
 def main():
-    # cite
-    # @article{PavlickAndTetreault-2016:TACL,
-    #   author =  {Ellie Pavlick and Joel Tetreault},
-    #   title =   {An Empirical Analysis of Formality in Online Communication},
-    #   journal = {Transactions of the Association for Computational Linguistics},
-    #   year =    {2016},
-    #   publisher = {Association for Computational Linguistics}
-    # }
-
-    # @article{Lahiri-2015:arXiv,
-    #   title={{SQUINKY! A} Corpus of Sentence-level Formality, Informativeness, and Implicature},
-    #   author={Lahiri, Shibamouli},
-    #   journal={arXiv preprint arXiv:1506.02306},
-    #   year={2015}
-    # }
     set_seed(42)
     num_epochs=6
     batch_size=48
@@ -128,40 +113,35 @@ def main():
     print("Test result", eval_result)
     trainer.save_model("./results_evaluator")
     
-    gyfac_train = "/work/pi_dhruveshpate_umass_edu/project_18/gyfac_pilot"
+    gyafc_train = "PATH TO GYAFC DATASET"
     print("Evaluating informal sentences...")
-    informal_sentences = read_gyfac_split(gyfac_train, label=1, split='test')
+    informal_sentences = read_gyafc_split(gyafc_train, label=1, split='test')
     print("avg score", evaluate_sentences_in_batches(model, tokenizer, informal_sentences))
     evaluate_sentence_by_sentence(model, tokenizer, random.sample(informal_sentences, 10))
 
-    formal_sentences = read_gyfac_split(gyfac_train, label=0, split='test')
+    formal_sentences = read_gyafc_split(gyafc_train, label=0, split='test')
     print("avg score", evaluate_sentences_in_batches(model, tokenizer, formal_sentences))
     evaluate_sentence_by_sentence(model, tokenizer, random.sample(formal_sentences, 10))
     
     random_indices = random.sample(range(500), 10)
     
-    # tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-    # config = BertConfig.from_pretrained("bert-base-uncased")
-    # config.num_labels = 1
-    # model_path = "/work/pi_dhruveshpate_umass_edu/amekala_umass_edu/tf-gyfac-classifier/results_evaluator/checkpoint-380"
-    # model = BertForRegression.from_pretrained(model_path, config=config).to("cuda")
-    print("Evaluating setfit_gyfac sentences...")
-    setfit_gyfac_file = "/work/pi_dhruveshpate_umass_edu/yashwanthbab_umass_edu/nlp/generation_results/humarin/setfit_gyfac/daily_dialog/summary.csv"
-    setfit_gyfac_sentences = pd.read_csv(setfit_gyfac_file)['Informal_15'].dropna().tolist()
-    print(len(setfit_gyfac_sentences))
-    print("avg score", evaluate_sentences_in_batches(model, tokenizer, setfit_gyfac_sentences))
+    print("Evaluating setfit_gyafc sentences...")
+    setfit_gyafc_file = "generation_results/humarin/setfit_gyafc/daily_dialog/summary.csv"
+    setfit_gyafc_sentences = pd.read_csv(setfit_gyafc_file)['Informal_15'].dropna().tolist()
+    print(len(setfit_gyafc_sentences))
+    print("avg score", evaluate_sentences_in_batches(model, tokenizer, setfit_gyafc_sentences))
     print("\n")
-    sample = [setfit_gyfac_sentences[i] for i in random_indices]
+    sample = [setfit_gyafc_sentences[i] for i in random_indices]
     evaluate_sentence_by_sentence(model, tokenizer, sample)
     print("\n\n")
     
-    print("Evaluating t5_gyfac_full sentences...")
-    t5_gyfac_full_file = "/work/pi_dhruveshpate_umass_edu/yashwanthbab_umass_edu/nlp/generation_results/humarin/t5_gyfac_full/daily_dialog/summary.csv"
-    t5_gyfac_full_sentences = pd.read_csv(t5_gyfac_full_file)['Informal_15'].dropna().tolist()
-    print(len(t5_gyfac_full_sentences))
-    print("avg score", evaluate_sentences_in_batches(model, tokenizer, t5_gyfac_full_sentences))
+    print("Evaluating t5_gyafc_full sentences...")
+    t5_gyafc_full_file = "generation_results/humarin/t5_gyafc_full/daily_dialog/summary.csv"
+    t5_gyafc_full_sentences = pd.read_csv(t5_gyafc_full_file)['Informal_15'].dropna().tolist()
+    print(len(t5_gyafc_full_sentences))
+    print("avg score", evaluate_sentences_in_batches(model, tokenizer, t5_gyafc_full_sentences))
     print("\n")
-    sample = [t5_gyfac_full_sentences[i] for i in random_indices]
+    sample = [t5_gyafc_full_sentences[i] for i in random_indices]
     evaluate_sentence_by_sentence(model, tokenizer, sample)
 
 
