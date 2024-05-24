@@ -38,7 +38,7 @@ def prepare_pavlick_formality(tokenizer, seed=42, refresh=False):
     def preprocess_tokenize(examples):
         return tokenizer(examples['sentence'], padding='max_length', truncation=True)
 
-    data_path = "/work/pi_dhruveshpate_umass_edu/project_18/pavlick"
+    data_path = "pavlick" # path to pavlick dataset object after storage
 
     if os.path.exists(os.path.join(data_path, "train_dataset")) and not refresh:
         print("loading from saved dataset")
@@ -73,9 +73,9 @@ def prepare_pavlick_formality(tokenizer, seed=42, refresh=False):
     return train_dataset, val_dataset, test_dataset
 
 
-def prepare_gyfac_split(data_path, split, tokenizer, cut_k=0):
+def prepare_gyafc_split(data_path, split, tokenizer, cut_k=0):
     
-    def read_gyfac_split(data_path, split='train'):
+    def read_gyafc_split(data_path, split='train'):
         texts, labels = [], []
         for label in [0, 1]:
             file = open(os.path.join(data_path, f"{split}_{label}.txt"))
@@ -89,7 +89,7 @@ def prepare_gyfac_split(data_path, split, tokenizer, cut_k=0):
         texts, labels = zip(*combined)
         return texts, labels
     
-    texts, labels = read_gyfac_split(data_path, split)
+    texts, labels = read_gyafc_split(data_path, split)
     data_dict = {"text": texts, "label": labels}
     dataset = Dataset.from_dict(data_dict)
     
@@ -124,7 +124,7 @@ def prepare_gyfac_split(data_path, split, tokenizer, cut_k=0):
 
 
 
-def load_gyfac(tokenizer, data_path = "/work/pi_dhruveshpate_umass_edu/project_18/gyfac_pilot", seed=1, val_split=0.05, cut_k=0, refresh=False):
+def load_gyafc(tokenizer, data_path = "PATH TO GYAFC DATASET", seed=1, val_split=0.05, cut_k=0, refresh=False):
     
     directory = f"{seed}_{val_split}_{cut_k}"
     full_path = os.path.join(data_path, directory)
@@ -136,11 +136,11 @@ def load_gyfac(tokenizer, data_path = "/work/pi_dhruveshpate_umass_edu/project_1
         test_dataset = load_from_disk(os.path.join(full_path, "test_dataset"))
     else:
         print("preparing split newly")
-        full_train_dataset = prepare_gyfac_split(data_path, "train", tokenizer, cut_k)
+        full_train_dataset = prepare_gyafc_split(data_path, "train", tokenizer, cut_k)
         train_splits = full_train_dataset.train_test_split(test_size=val_split, shuffle=True, seed=seed)
         train_dataset = train_splits["train"]
         val_dataset = train_splits["test"]
-        test_dataset = prepare_gyfac_split(data_path, "test", tokenizer, cut_k)
+        test_dataset = prepare_gyafc_split(data_path, "test", tokenizer, cut_k)
         
         if not os.path.exists(full_path):
             os.makedirs(full_path)
@@ -162,8 +162,8 @@ def main():
     
     hf_key = "t5-base"
     tokenizer = T5Tokenizer.from_pretrained(hf_key, use_fast=True, legacy=True)
-    data_path = "/work/pi_dhruveshpate_umass_edu/project_18/gyfac_pilot"
-    train_dataset, val_dataset, test_dataset = load_gyfac(tokenizer, data_path, seed, val_split, cut_k)
+    data_path = "PATH TO GYAFC DATASET"
+    train_dataset, val_dataset, test_dataset = load_gyafc(tokenizer, data_path, seed, val_split, cut_k)
 
 if __name__ == "__main__":
     main()
