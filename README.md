@@ -13,7 +13,9 @@ pip install -r requirements.txt
 pip install git+https://github.com/molereddy/token-level-setfit.git
 ```
 
-**Classify** in the `classifiers/` directory
+**Classify** 
+
+in the `classifiers/` directory
 `train_fudge_classifier.py` trains an encoder-decoder T5-based formality classifier model on the [GYAFC dataset](https://arxiv.org/abs/1803.06535) as in FUDGE.
 
 `train_setfit_classifier.py` (our method) trains the T5 based model on a fewshot example set from [GYAFC](https://arxiv.org/abs/1803.06535), to optimize the FUDGE classifier training efficiency.
@@ -32,6 +34,7 @@ python train_setfit_classifier.py \
 ```
 
 **Generate**
+
 `generate.py` uses a T5 generator ([humarin paraphraser version](https://huggingface.co/humarin/chatgpt_paraphraser_on_T5_base)) and a classifier from above to guide the generation, to generate styled paraphrases on the given datasets.
 ```
 # To generate the sentences using our architecture, run the file as shown below
@@ -44,7 +47,9 @@ python generate.py \
     --results_dir "generation_results"
 ```
 
-**Evaluate** in the `eval/` directory
+**Evaluate** 
+
+in the `eval/` directory
 `bert_style_reg_train.py` trains a BERT-based formality regression model on the Pavlick formality dataset. `bert_style_reg_eval.py` uses this trained model to evaluates our generations. Its classifier evaluation counterpart, `deberta_style_class_eval.py`, loads a [model](https://huggingface.co/s-nlp/deberta-large-formality-ranker) trained on [GYAFC dataset](https://arxiv.org/abs/1803.06535) using DeBERTa architecture and evaluates our generations.
 `roberta_nli_eval.py` evaluates Paraphrasing quality is evaluated with a RoBERTa based [paraphrase ranker](https://huggingface.co/cross-encoder/nli-roberta-base) from SentenceTransformers.
 ```
@@ -59,7 +64,8 @@ python roberta_nli_eval.py \
     -fp "generation_results/humarin/setfit_gyafc_partial_40/daily_dialog/summary.csv"
 ```
 
-**Datasets:**
+**Datasets**
+
 Daily Dialog (conversational dataset) loaded [from here](https://huggingface.co/datasets/daily_dialog).
 GYAFC style dataset is not publicly available, please contact the authors.
 Pavlick formality dataset (aka SQUINKY) loaded [from here](https://huggingface.co/datasets/osyvokon/pavlick-formality-scores).
