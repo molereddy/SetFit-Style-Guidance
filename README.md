@@ -55,13 +55,13 @@ in the `eval/` directory
 ```
 # To evaluate the formality of the generated sentences (in summary.csv), 
 python deberta_style_class_eval.py \
-    -fp "generation_results/humarin/setfit_gyafc_partial_40/daily_dialog/summary.csv"
+    -fp "generation_results/setfit_gyafc_partial_40/daily_dialog/summary.csv"
 python bert_style_reg_eval.py \
-    -fp "generation_results/humarin/setfit_gyafc_partial_40/daily_dialog/summary.csv"
+    -fp "generation_results/setfit_gyafc_partial_40/daily_dialog/summary.csv"
 
 # To evaluate the content preservation of the generated sentences (in summary.csv),
 python roberta_nli_eval.py \
-    -fp "generation_results/humarin/setfit_gyafc_partial_40/daily_dialog/summary.csv"
+    -fp "generation_results/setfit_gyafc_partial_40/daily_dialog/summary.csv"
 ```
 
 **Datasets**

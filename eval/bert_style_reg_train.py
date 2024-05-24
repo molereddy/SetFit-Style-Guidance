@@ -126,7 +126,7 @@ def main():
     random_indices = random.sample(range(500), 10)
     
     print("Evaluating setfit_gyafc sentences...")
-    setfit_gyafc_file = "generation_results/humarin/setfit_gyafc/daily_dialog/summary.csv"
+    setfit_gyafc_file = "generation_results/setfit_gyafc/daily_dialog/summary.csv"
     setfit_gyafc_sentences = pd.read_csv(setfit_gyafc_file)['Informal_15'].dropna().tolist()
     print(len(setfit_gyafc_sentences))
     print("avg score", evaluate_sentences_in_batches(model, tokenizer, setfit_gyafc_sentences))
@@ -136,7 +136,7 @@ def main():
     print("\n\n")
     
     print("Evaluating t5_gyafc_full sentences...")
-    t5_gyafc_full_file = "generation_results/humarin/t5_gyafc_full/daily_dialog/summary.csv"
+    t5_gyafc_full_file = "generation_results/t5_gyafc_full/daily_dialog/summary.csv"
     t5_gyafc_full_sentences = pd.read_csv(t5_gyafc_full_file)['Informal_15'].dropna().tolist()
     print(len(t5_gyafc_full_sentences))
     print("avg score", evaluate_sentences_in_batches(model, tokenizer, t5_gyafc_full_sentences))
