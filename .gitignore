@@ -3,3 +3,4 @@ results*
 logs*/
 best_model*/
 *.sh
+generation_results/*/*/gyafc/*
